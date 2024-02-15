@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import htmlandcss from "../Image/html &css.png";
 import Sql from "../Image/sql.png";
 import hostinger from "../Image/hostinger.png";
@@ -9,7 +9,7 @@ import softwaretesting from "../Image/software testing.png";
 import javascript from "../Image/java script.png";
 import python2 from "../Image/python.png";
 import bootstrap from "../Image/bootstrap.png";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { IconButton } from "@mui/material";
 import {
   AccountCircle,
@@ -23,6 +23,70 @@ import {
 import AddCourse from "../AddCourse";
 
 const Eduvilla = () => {
+  const navigate = useNavigate();
+  const [data, setData] = useState([
+    {
+      id: 1,
+      img: htmlandcss,
+      title: "Front-end",
+      name: "HTML & CSS",
+    },
+    {
+      id: 2,
+      img: Sql,
+      title: "database",
+      name: "SQL Lite",
+    },
+    {
+      id: 3,
+      img: hostinger,
+      title: "hosting",
+      name: "Hostinger Tutorial",
+    },
+    {
+      id: 4,
+      img: reactjs,
+      title: "Front-end",
+      name: "ReactJs Tutorial",
+    },
+    {
+      id: 5,
+      img: Pythons,
+      title: "back-end",
+      name: "Python Beginner's Guide",
+    },
+    {
+      id: 6,
+      img: lightroom,
+      title: "others",
+      name: "Lightroom Tutorial",
+    },
+    {
+      id: 7,
+      img: softwaretesting,
+      title: "Front-end",
+      name: "Testing",
+    },
+    {
+      id: 8,
+      img: javascript,
+      title: "Back-end",
+      name: "Core Java",
+    },
+    {
+      id: 9,
+      img: python2,
+      title: "back-end",
+      name: "Python Basics",
+    },
+    {
+      id: 10,
+      img: bootstrap,
+      title: "Front-end",
+      name: "Bootstrap",
+    },
+  ]);
+
   return (
     <>
       <div>
@@ -58,68 +122,29 @@ const Eduvilla = () => {
               <KeyboardArrowRight />
             </IconButton>
           </div>
-          <div className="p-2">
+          <div>
             <div className="grid grid-cols-5 gap-2 ">
-              <div className="flex flex-col p-2 rounded border bg-slate-50">
-                <img src={htmlandcss} alt="" />
-                <p className="uppercase  text-slate-400">Front-end</p>
-                <p className="text-lg font-semibold">HTML & CSS</p>
-              </div>
-
-              <div className="flex flex-col p-2 rounded border bg-slate-50">
-                <img src={Sql} alt="" />
-                <p className="uppercase  text-slate-400">database</p>
-                <p className="text-lg font-semibold">SQL Lite</p>
-              </div>
-
-              <Link to="/hostinger">
-                <div className="flex flex-col p-2 rounded border bg-slate-50">
-                  <img src={hostinger} alt="" />
-                  <p className="uppercase  text-slate-400">hosting</p>
-                  <p className="text-lg font-semibold">Hostinger Tutorial</p>
+              {data.map((hello) => (
+                <div
+                  key={hello.id}
+                  onClick={() =>
+                    navigate(`/eduvilla/${hello.id}`, { state: hello })
+                  }
+                >
+                  <div>
+                    <img src={`${hello.img}/${hello.id}`} alt="" />
+                    <div className="flex flex-col p-2 rounded border bg-slate-50">
+                      <img src={hello.img} alt="" />
+                      <p className="uppercase  text-slate-400">{hello.title}</p>
+                      <p className="text-lg font-semibold">{hello.name}</p>
+                    </div>
+                  </div>
                 </div>
-              </Link>
+              ))}
 
-              <div className="flex flex-col p-2 rounded border bg-slate-50">
-                <img src={reactjs} alt="" />
-                <p className="uppercase  text-slate-400">Front-end</p>
-                <p className="text-lg font-semibold">ReactJs Tutorial</p>
+              <div className="p-2 rounded border bg-slate-50">
+                <AddCourse data={data} setData={setData} />
               </div>
-              <div className="flex flex-col p-2 rounded border bg-slate-50">
-                <img src={Pythons} alt="" />
-                <p className="uppercase  text-slate-400">back-end</p>
-                <p className="text-lg font-semibold">Python Beginner's Guide</p>
-              </div>
-              <div className="flex flex-col p-2 rounded border bg-slate-50">
-                <img src={lightroom} alt="" />
-                <p className="uppercase  text-slate-400">others</p>
-                <p className="text-lg font-semibold">Lightroom Tutorial</p>
-              </div>
-              <div className="flex flex-col p-2 rounded border bg-slate-50">
-                <img src={softwaretesting} alt="" />
-                <p className="uppercase  text-slate-400">Front-end</p>
-                <p className="text-lg font-semibold">Testing</p>
-              </div>
-              <div className="flex flex-col p-2 rounded border bg-slate-50">
-                <img src={javascript} alt="" />
-                <p className="uppercase  text-slate-400">Back-end</p>
-                <p className="text-lg font-semibold">Core Java</p>
-              </div>
-              <div className="flex flex-col p-2 rounded border bg-slate-50">
-                <img src={python2} alt="" />
-                <p className="uppercase  text-slate-400">back-end</p>
-                <p className="text-lg font-semibold">Python Basics</p>
-              </div>
-              <div className="flex flex-col p-2 rounded border bg-slate-50">
-                <img src={bootstrap} alt="" />
-                <p className="uppercase  text-slate-400">Front-end</p>
-                <p className="text-lg font-semibold">Bootstrap</p>
-              </div>
-              <Link>
-                <div className="p-2 rounded border bg-slate-50">
-                  <AddCourse />
-                </div>
-              </Link>
             </div>
           </div>
         </div>
